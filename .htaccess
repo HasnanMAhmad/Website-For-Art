@@ -1,0 +1,29 @@
+# MISHIS ARTWORK — Production Apache / Hostinger SPA Routing & Security
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Do not rewrite if real file or directory exists (images, CSS, JS, etc.)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 2. Do not rewrite API endpoints or uploads
+  RewriteRule ^api/ - [L]
+  RewriteRule ^assets/ - [L]
+
+  # 3. Rewrite all clean routes to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Caching and Compression Headers for Performance
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Security Headers
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

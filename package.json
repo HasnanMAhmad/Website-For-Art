@@ -1,0 +1,20 @@
+{
+  "name": "mishis-artwork",
+  "version": "1.0.0",
+  "description": "Mishi's Artwork Luxury Storefront & Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000 --directory .",
+    "build": "python -c \"print('Production bundle is self-contained: index.html')\"",
+    "verify": "python verify-site-secure.py",
+    "deploy": "python deploy.py"
+  },
+  "keywords": [
+    "art-storefront",
+    "oil-paintings",
+    "fine-art-prints",
+    "bookmarks"
+  ],
+  "author": "Mishayam Rehman",
+  "license": "UNLICENSED"
+}

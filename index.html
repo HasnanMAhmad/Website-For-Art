@@ -4785,7 +4785,7 @@ function adminLogout() {
 async function fetchArtworksFromBackend(notify = false) {
   const badge = document.getElementById('admin-cloud-badge');
   try {
-    const res = await fetch('api/products.php?format=grouped');
+    const res = await fetch('/api/products.php?format=grouped');
     if (!res.ok) throw new Error(`HTTP error ${res.status}`);
     const json = await res.json();
 
@@ -5136,7 +5136,7 @@ async function saveQuickPrice(id, trigger) {
 
   // Call API PATCH
   try {
-    await fetch('api/products.php?pin=mishi2026', {
+    await fetch('/api/products.php?pin=mishi2026', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'X-Studio-Pin': 'mishi2026' },
       body: JSON.stringify({ id: id, priceGBP: newPrice })
@@ -5166,7 +5166,7 @@ async function saveQuickStatus(id, newStatus) {
   });
 
   try {
-    await fetch('api/products.php?pin=mishi2026', {
+    await fetch('/api/products.php?pin=mishi2026', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'X-Studio-Pin': 'mishi2026' },
       body: JSON.stringify({ id: id, status: newStatus })
@@ -5198,7 +5198,7 @@ async function toggleArtworkFeatured(id) {
   });
 
   try {
-    await fetch('api/products.php?pin=mishi2026', {
+    await fetch('/api/products.php?pin=mishi2026', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'X-Studio-Pin': 'mishi2026' },
       body: JSON.stringify({ id: id, featured: newFeatured })
@@ -5317,7 +5317,7 @@ function handleModalImageSelect(event) {
   const formData = new FormData();
   formData.append('image', file);
 
-  fetch('api/upload.php?allow_guest=1', {
+  fetch('/api/upload.php?allow_guest=1', {
     method: 'POST',
     headers: { 'X-Studio-Pin': 'mishi2026' },
     body: formData
@@ -5484,7 +5484,7 @@ async function handleSaveArtworkForm(event) {
 
   // Send to API
   try {
-    await fetch('api/products.php?pin=mishi2026', {
+    await fetch('/api/products.php?pin=mishi2026', {
       method: isEdit ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Studio-Pin': 'mishi2026' },
       body: JSON.stringify(payload)
@@ -5527,7 +5527,7 @@ async function executeDeleteArtwork() {
   });
 
   try {
-    await fetch(`api/products.php?id=${encodeURIComponent(id)}&pin=mishi2026`, {
+    await fetch(`/api/products.php?id=${encodeURIComponent(id)}&pin=mishi2026`, {
       method: 'DELETE',
       headers: { 'X-Studio-Pin': 'mishi2026' }
     });
@@ -5566,7 +5566,7 @@ async function confirmResetCatalog() {
   }
 
   try {
-    const res = await fetch('api/products.php?action=reset&pin=mishi2026', {
+    const res = await fetch('/api/products.php?action=reset&pin=mishi2026', {
       method: 'POST',
       headers: { 'X-Studio-Pin': 'mishi2026' }
     });
@@ -5671,7 +5671,7 @@ async function renderAdminOrdersList() {
 
   let orders = [];
   try {
-    const res = await fetch('api/orders.php');
+    const res = await fetch('/api/orders.php');
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data.orders)) orders = data.orders;
@@ -5816,7 +5816,7 @@ async function updateAdminOrderStatus(orderId, newStatus) {
   } catch(e) {}
 
   try {
-    await fetch(`api/orders.php?id=${encodeURIComponent(orderId)}`, {
+    await fetch(`/api/orders.php?id=${encodeURIComponent(orderId)}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus })
@@ -5856,7 +5856,7 @@ function saveAdminCredentials(creds) {
 
   // Attempt backend Hostinger sync in background if PHP endpoint exists
   try {
-    fetch('api/auth.php?action=update_credentials', {
+    fetch('/api/auth.php?action=update_credentials', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -7610,7 +7610,7 @@ async function handleSecureCardPayment(event) {
 
   // 2. Dispatch to backend API (api/orders.php)
   try {
-    fetch('api/orders.php', {
+    fetch('/api/orders.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderPayload)
